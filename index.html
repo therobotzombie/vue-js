@@ -14,9 +14,13 @@
 <div id="app">
 	<input type="text" v-on:input="changeTitle">
 
-	<p>
+	<p v-once>
 		{{ title }}
 	</p>
+	<p>
+		Visit <a v-bind:href="link">{{ link }}</a>
+	</p>
+	<p v-html="finishedLink"></p>
 	<p>
 		{{ sayHello() }}
 	</p>
@@ -29,14 +33,17 @@
     new Vue({
         el: '#app',
         data: {
-            title: 'Hello World!'
+            title: 'Hello World!',
+			link: 'http://google.de',
+			finishedLink: '<a href="http://google.com">finished link</a>'
         },
         methods: {
             changeTitle: function(event) {
                 this.title = event.target.value;
             },
             sayHello: function () {
-                return "Hello!"
+                this.title = 'Hey!';
+                return this.title;
             }
         }
     });
